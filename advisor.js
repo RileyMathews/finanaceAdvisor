@@ -24,6 +24,9 @@ const advisor = Object.create(null, {
             return worth
         }
     },
+    history: {
+        value: []
+    },
     purchase: {
         value: function (stockToChange, purchaseQuantity, pricePerStock) {
             let stockFound = false
@@ -41,6 +44,11 @@ const advisor = Object.create(null, {
                     "valuation": pricePerStock * purchaseQuantity
                 }
             }
+            this.history.push(
+                {
+                    
+                }
+            )
         },
         enumerable: false
     }, //ends purchase property
