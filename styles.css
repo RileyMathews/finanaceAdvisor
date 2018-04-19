@@ -1,0 +1,23 @@
+* {
+    font-family: arial;
+}
+body {
+    margin: 0;
+}
+header {
+    display: flex;
+    justify-content: center;
+    background-color: skyblue;
+    text-align: center;
+}
+section {
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+}
+card {
+    border: 1px solid black;
+    display: inline-block;
+    margin: 1em;
+    padding: .5em;
+}

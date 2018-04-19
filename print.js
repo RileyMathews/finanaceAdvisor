@@ -5,17 +5,19 @@ const article = document.querySelector("#main")
 //create advisor info section
 const createAdvisor = () => {
     const section = document.createElement('header')
+    const wrapper = document.createElement('div')
     const heading = document.createElement('h1')
     heading.textContent = advisor.name
-    section.appendChild(heading)
+    wrapper.appendChild(heading)
     
     const company = document.createElement('h3')
     company.textContent = advisor.company
-    section.appendChild(company)
+    wrapper.appendChild(company)
 
     const specialty = document.createElement('p')
     specialty.textContent = `My specialty is: ${advisor.specialty}`
-    section.appendChild(specialty)
+    wrapper.appendChild(specialty)
+    section.appendChild(wrapper)
 
     article.appendChild(section)
 }
@@ -24,6 +26,7 @@ createAdvisor()
 
 //create components for each stock owned
 const createStocks = () => {
+    const section = document.createElement('section')
     const frag = document.createDocumentFragment()
 
     for (let stock in advisor.portfolio) {
@@ -47,7 +50,8 @@ const createStocks = () => {
         //append to frag
         frag.appendChild(card)
     }
-    article.appendChild(frag)
+    section.appendChild(frag)
+    article.appendChild(section)
 }
 
 createStocks()
