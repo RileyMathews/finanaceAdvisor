@@ -1,4 +1,4 @@
-const advisor = Object.create({}, {
+const advisor = Object.create(null, {
     company: {
         value: "Finance",
         enumerable: true,
@@ -72,6 +72,11 @@ advisor.purchase("MSFT", 100, 100)
 advisor.sell("MSFT", 5, 50)
 advisor.purchase("APPL", 50, 100)
 advisor.sell("APPL", 30, 100)
+advisor.purchase("SNY", 20, 50)
+advisor.purchase("ACT", 24, 50)
+advisor.purchase("BLZ", 20, 60)
+advisor.purchase("NTD", 20, 57)
+advisor.purchase("VLV", 20, 40)
 
 console.log(advisor.portfolio)
 console.log(advisor.worth())
