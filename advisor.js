@@ -1,11 +1,11 @@
 const advisor = Object.create(null, {
     company: {
-        value: "Finance",
+        value: "Moneyz",
         enumerable: true,
         writable: true
     },
     specialty: {
-        value: "technology",
+        value: "Technology",
         enumerable: true,
         writable: true
     },
@@ -28,43 +28,51 @@ const advisor = Object.create(null, {
         value: []
     },
     purchase: {
-        value: function (stockToChange, purchaseQuantity, pricePerStock) {
+        value: function (ticker, quantity, price) {
             let stockFound = false
             for (let stock in this.portfolio) {
-                if (stock === stockToChange) {
-                    this.portfolio[stock].shares += purchaseQuantity
-                    this.portfolio[stock].valuation += purchaseQuantity * pricePerStock
+                if (stock === ticker) {
+                    this.portfolio[stock].shares += quantity
+                    this.portfolio[stock].valuation += quantity * price
                     stockFound = true
-                    return stock
                 }
             };
             if (stockFound === false) {
-                this.portfolio[stockToChange] = {
-                    "shares": purchaseQuantity,
-                    "valuation": pricePerStock * purchaseQuantity
+                this.portfolio[ticker] = {
+                    "shares": quantity,
+                    "valuation": price * quantity
                 }
             }
             this.history.push(
                 {
-                    
+                    ticker,
+                    quantity,
+                    price,
+                    purchase: true
                 }
             )
         },
         enumerable: false
     }, //ends purchase property
     sell: {
-        value: function (stockSold, quantitySold, pricePerStock) {
-            console.log('started function')
+        value: function (ticker, quantity, price) {
             for (let stock in this.portfolio) {
-                console.log(this.portfolio[stock])
-                if (stock === stockSold) {
-                    this.portfolio[stock].shares -= quantitySold
-                    this.portfolio[stock].valuation -= quantitySold * pricePerStock
+                if (stock === ticker) {
+                    this.portfolio[stock].shares -= quantity
+                    this.portfolio[stock].valuation -= quantity * price
                     if (this.portfolio[stock].shares === 0) {
                         delete this.portfolio[stock]
                     }
                 }
             }
+            this.history.push(
+                {
+                    ticker,
+                    quantity,
+                    price,
+                    purchase: false
+                }
+            )
         }
     }
 }) //ends object creation
@@ -85,6 +93,3 @@ advisor.purchase("ACT", 24, 50)
 advisor.purchase("BLZ", 20, 60)
 advisor.purchase("NTD", 20, 57)
 advisor.purchase("VLV", 20, 40)
-
-console.log(advisor.portfolio)
-console.log(advisor.worth())
