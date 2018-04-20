@@ -1,6 +1,6 @@
 //
 const article = document.querySelector("#main")
-
+const headerSection = document.querySelector("#header")
 
 //create advisor info section
 const createAdvisor = () => {
@@ -19,7 +19,7 @@ const createAdvisor = () => {
     wrapper.appendChild(specialty)
     section.appendChild(wrapper)
 
-    article.appendChild(section)
+    headerSection.appendChild(section)
 }
 
 createAdvisor()
