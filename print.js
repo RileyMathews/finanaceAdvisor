@@ -1,6 +1,6 @@
 //
 const article = document.querySelector("#main")
-
+const headerSection = document.querySelector("#header")
 
 //create advisor info section
 const createAdvisor = () => {
@@ -19,7 +19,7 @@ const createAdvisor = () => {
     wrapper.appendChild(specialty)
     section.appendChild(wrapper)
 
-    article.appendChild(section)
+    headerSection.appendChild(section)
 }
 
 createAdvisor()
@@ -55,3 +55,34 @@ const createStocks = () => {
 }
 
 createStocks()
+
+//print history of transactions to dom
+const createHistory = () => {
+    const section = document.createElement('section')
+    const frag = document.createDocumentFragment()
+
+    advisor.history.forEach(transaction => {
+        const card = document.createElement("card")
+
+        //create heading
+        const heading = document.createElement("h1")
+        heading.textContent = `Stock: ${transaction.ticker}`
+        card.appendChild(heading)
+
+        //create purchase or sell
+        if (transaction.purchase) {
+            const text = document.createElement("p")
+            text.textContent = `I sold ${transaction.quantity} shares for $${transaction.price} each`
+            card.appendChild(text)
+        } else {
+            const text = document.createElement("p")
+            text.textContent = `I purchased ${transaction.quantity} shares for $${transaction.price} each`
+            card.appendChild(text)
+        }
+
+        //append to frag
+        frag.appendChild(card)
+    });
+    section.appendChild(frag)
+    article.appendChild(section)
+}
